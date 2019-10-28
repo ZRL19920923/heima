@@ -2,17 +2,17 @@ import VueRouter from 'vue-router'
 
 import Vue from 'vue'
 
-import Login from '@/views/login/index'
-import Home from '@/views/home/index'
-import Comment from '@/views/comment/index'
-import Fans from '@/views/fans/index'
-import Welcome from '@/views/welcome/index'
-import Image from '@/views/image/index'
-import Publish from '@/views/publish/index'
-import Setting from '@/views/setting/index'
-import Article from '@/views/article/index'
-import Notfound from '@/views/404/index'
-import store from '@/store/index'
+import Login from '@/views/login'
+import Home from '@/views/home'
+import Comment from '@/views/comment'
+import Fans from '@/views/fans'
+import Welcome from '@/views/welcome'
+import Image from '@/views/image'
+import Publish from '@/views/publish'
+import Setting from '@/views/setting'
+import Article from '@/views/article'
+import Notfound from '@/views/404'
+import store from '@/store'
 
 Vue.use(VueRouter)
 

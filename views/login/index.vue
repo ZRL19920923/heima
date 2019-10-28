@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import store from '../../store/index.js'
+import store from '@/store'
 export default {
   data () {
     // 自定义验证方法

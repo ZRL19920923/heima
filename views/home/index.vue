@@ -49,15 +49,15 @@
             <i class="el-icon-s-fold" @click="toggle"></i>
             <span class="text">江苏传智播客科技教育有限公司</span>
           </span>
-          <el-dropdown class="mydropdown" placement="bottom">
+          <el-dropdown class="mydropdown" placement="bottom" @command="command">
             <span class="el-dropdown-link">
-              <img src="../../assets/images/avatar.jpg" alt="">
-              <span class="name">用户名称</span>
+              <img :src="photo" alt="">
+              <span class="name">{{name}}</span>
               <i class="el-icon-arrow-down el-icon--right"></i>
             </span>
             <el-dropdown-menu slot="dropdown">
-              <el-dropdown-item class="el-icon-setting">个人设置</el-dropdown-item>
-              <el-dropdown-item><span class="el-icon-unlock"></span> 退出登录</el-dropdown-item>
+              <el-dropdown-item class="el-icon-setting" command="setting">个人设置</el-dropdown-item>
+              <el-dropdown-item  command="layout"><span class="el-icon-unlock"></span> 退出登录</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-header>
@@ -70,15 +70,32 @@
 </template>
 
 <script>
+import store from '@/store'
 export default {
   data () {
     return {
-      iscollcope: false
+      iscollcope: false,
+      name: null,
+      photo: null
     }
   },
+  created () {
+    this.photo = store.getUser().photo
+    this.name = store.getUser().name
+  },
   methods: {
+    command (command) {
+      this[command]()
+    },
     toggle () {
       this.iscollcope = !this.iscollcope
+    },
+    setting () {
+      this.$router.push('/setting')
+    },
+    layout () {
+      store.delUser()
+      this.$router.push('/login')
     }
   }
 }
