@@ -7,6 +7,8 @@ import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
 // axios 简单配置
 import axios from '@/api/index'
+import myPlugin from '@/components'
+Vue.use(myPlugin)
 Vue.use(ElementUI)
 Vue.prototype.$http = axios
 Vue.config.productionTip = false
