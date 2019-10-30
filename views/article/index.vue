@@ -16,9 +16,8 @@
           </el-radio-group>
         </el-form-item>
         <el-form-item label="频道:">
-          <el-select v-model="reqParams.channelId" placeholder="请选择">
-            <el-option v-for="item in options" :key="item.id" :label="item.name" :value="item.id"></el-option>
-          </el-select>
+         <!-- 此处放频道的封装组件 -->
+         <my-channel v-model="reqParams.channel_id"></my-channel>
         </el-form-item>
         <el-form-item label="日期:">
           <el-date-picker
@@ -100,19 +99,18 @@ export default {
       tableData: [],
       reqParams: {
         status: null,
-        channelId: null,
+        channel_id: null,
         page: 1,
         per_page: 20,
         begin_pubdate: null,
         end_pubdate: null
       },
       dateArr: [],
-      options: [],
       total: 0
     }
   },
   created () {
-    this.getChannel()
+    // this.getChannel()
     this.getArticles()
   },
   methods: {
@@ -165,13 +163,6 @@ export default {
       //   console.log(data)
       this.tableData = data.results
       this.total = data.total_count
-    },
-    // 获得频道数据
-    async getChannel () {
-      const {
-        data: { data }
-      } = await this.$http.get('channels')
-      this.options = data.channels
     }
   }
 }
