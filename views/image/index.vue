@@ -85,7 +85,7 @@ export default {
   methods: {
     //   上传图片成功事件
     handleSuccess (res) {
-      console.log(res)
+      // console.log(res)
       this.$message.success('上传成功')
       this.imageUrl = res.data.url
       window.setTimeout(() => {

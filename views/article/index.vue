@@ -71,7 +71,7 @@
               icon="el-icon-edit"
               circle
               plain
-              @click="$router.push('/publish?'+scope.row.id)"
+              @click="edit(scope.row.id)"
             ></el-button>
             <el-button type="danger" icon="el-icon-delete" circle plain @click="delArticle(scope.row.id)"></el-button>
           </template>
@@ -114,6 +114,11 @@ export default {
     this.getArticles()
   },
   methods: {
+    // 跳转编辑
+    edit (id) {
+      // const login = { path: '/publish', query: { id: id } }
+      this.$router.push('/publish?id=' + id)
+    },
     //   改变日期的事件
     changeDate (dateArr) {
       if (dateArr) {

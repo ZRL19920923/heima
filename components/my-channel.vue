@@ -26,7 +26,7 @@ export default {
       const {
         data: { data }
       } = await this.$http.get('channels')
-      console.log(data)
+      // console.log(data)
       this.options = data.channels
     }
   },
