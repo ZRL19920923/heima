@@ -52,6 +52,33 @@ import 'quill/dist/quill.snow.css'
 import 'quill/dist/quill.bubble.css'
 import { quillEditor } from 'vue-quill-editor'
 export default {
+  data () {
+    return {
+      articleForm: {
+        title: null,
+        cover: {
+          type: 1,
+          images: []
+        },
+        content: '',
+        channel_id: null
+      },
+      activeId: null,
+      editorOption: {
+        placeholder: '',
+        modules: {
+          toolbar: [
+            ['bold', 'italic', 'underline', 'strike'],
+            ['blockquote', 'code-block'],
+            [{ header: 1 }, { header: 2 }],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            [{ indent: '-1' }, { indent: '+1' }],
+            ['image']
+          ]
+        }
+      }
+    }
+  },
   components: {
     quillEditor
   },
@@ -61,6 +88,31 @@ export default {
     if (this.activeId) {
       // console.log(456)
       this.getArticle()
+    }
+  },
+  watch: {
+    '$route.query.id': function (newVal, oldVal) {
+      // console.log(newVal, oldVal)
+      // 从发布文章到的修改文章
+      if (newVal) {
+        this.activeId = this.$route.query.id
+        if (this.activeId) {
+          // console.log(456)
+          this.getArticle()
+        }
+        return false
+      }
+      // 从修改文章到发布文章
+      this.articleForm = {
+        title: '',
+        cover: {
+          type: 1,
+          images: []
+        },
+        content: '',
+        channel_id: null
+      }
+      this.activeId = null
     }
   },
   methods: {
@@ -87,33 +139,6 @@ export default {
       await this.$http.put(`articles/${this.activeId}?draft=${draft}`, this.articleForm)
       this.$message.success(draft ? '存为草稿成功' : '修改成功')
       this.$router.push('/article')
-    }
-  },
-  data () {
-    return {
-      articleForm: {
-        title: null,
-        cover: {
-          type: 1,
-          images: []
-        },
-        content: '',
-        channel_id: null
-      },
-      activeId: null,
-      editorOption: {
-        placeholder: '',
-        modules: {
-          toolbar: [
-            ['bold', 'italic', 'underline', 'strike'],
-            ['blockquote', 'code-block'],
-            [{ header: 1 }, { header: 2 }],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            [{ indent: '-1' }, { indent: '+1' }],
-            ['image']
-          ]
-        }
-      }
     }
   }
 }
